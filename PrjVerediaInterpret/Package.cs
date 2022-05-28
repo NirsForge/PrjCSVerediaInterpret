@@ -11,6 +11,7 @@
             $"\"main\": \"index.nv\""
         };
         private static Files packageFile = new Files("package.nir");
+        public static List<CodeFiles> ArgCodeFiles { get; private set; }
         #endregion //Properties
 
         public static void Start()
@@ -26,6 +27,15 @@
             }
 
             if (!File.Exists(MainFile)) packageFile.Save("c.wl(\"Hello World\")");
+        }
+        public static void FunCodeFiles()
+        {
+            string[] argCodeFiles = Directory.GetFiles(@"\", "*.nv", SearchOption.AllDirectories);
+
+            foreach (var item in argCodeFiles)
+            {
+                ArgCodeFiles.Add();
+            }
         }
     }
 }
