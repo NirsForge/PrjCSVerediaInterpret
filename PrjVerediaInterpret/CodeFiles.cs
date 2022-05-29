@@ -5,31 +5,32 @@
         #region Initialise
         public CodeFiles(string paf)
         {
-            Paf = paf;
-            var file = new Files(Paf);
-            file.Read(out code);
+            var file = new Files(paf);
+            file.Read(out List<string> code);
+            Code = code;
 
-            for (int i = 0; i < code.Count; i++)
+            for (int i = 0; i < Code.Count; i++)
             {
-                if (code[i].Length >= 2)
-                    if (code[i].Substring(0,2) == "//") code.RemoveAt(i);
+                if (Code[i].Length >= 2)
+                    if (Code[i].Substring(0,2) == "//") Code.RemoveAt(i);
             }
+
+            Split();
 
             if (Missing()) Lib.End("Error: Missing argument");
         }
         #endregion //Initialise
 
         #region Properties
-        private string Paf { get; }
-        private List<string> code;
-        private List<CodeLine> argCode;
+        public List<CodeLine> ArgCode { get; private set; }
+        public List<string> Code { get; private set; }
         #endregion //Properties
 
         private bool Missing()
         {
             List<int> clamp = new List<int>() { 0, 0, 0 }; //{ "{}", "[]", "()" }
 
-            foreach (var item in argCode)
+            foreach (var item in ArgCode)
             {
                 for (int i = 0; i < item.Line.Count(); i++)
                 {
@@ -54,12 +55,12 @@
         }
         private void Split()
         {
-            foreach (var line in code)
+            foreach (var line in Code)
             {
-                argCode.Add(new CodeLine(line.Split(" ")));
+                ArgCode.Add(new CodeLine(line.Split(" ")));
             }
 
-            foreach (var item in argCode)
+            foreach (var item in ArgCode)
             {
                 for (int i = 0; i < item.Line.Count(); i++)
                 {
