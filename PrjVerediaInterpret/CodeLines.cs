@@ -1,13 +1,13 @@
 ﻿namespace Project
 {
-    internal class CodeLines
+    internal class CodeLine
     {
         #region Initialise
-        public CodeLines(string[] line)
+        public CodeLine(string[] line)
         {
             Line = line;
         }
-        public CodeLines(List<string> line) : this(line.ToArray()) { }
+        public CodeLine(List<string> line) : this(line.ToArray()) { }
         #endregion //Initialise
 
         #region Properties

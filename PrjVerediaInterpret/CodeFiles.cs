@@ -22,7 +22,7 @@
         #region Properties
         private string Paf { get; }
         private List<string> code;
-        private List<CodeLines> argCode;
+        private List<CodeLine> argCode;
         #endregion //Properties
 
         private bool Missing()
@@ -60,14 +60,86 @@
         {
             foreach (var line in code)
             {
-                argCode.Add(new CodeLines(line.Split(" ")));
+                argCode.Add(new CodeLine(line.Split(" ")));
             }
 
             foreach (var item in argCode)
             {
                 for (int i = 0; i < item.Line.Count(); i++)
                 {
-                    
+                    if (item.Line[i].Substring(0, item.Line[i].Length - 1) == ";")
+                    {
+                        item.Line[i] = item.Line[i].ToString().Substring(0, item.Line[i].Length - 1);
+                        item.Line[i + 1] = ";";
+                    }
+                    else if (item.Line[i].Substring(0, item.Line[i].Length - 1) == ",")
+                    {
+                        item.Line[i] = item.Line[i].ToString().Substring(0, item.Line[i].Length - 1);
+                        item.Line[i + 1] = ",";
+                    }
+                    else if (item.Line[i].Substring(0, item.Line[i].Length - 1) == ")")
+                    {
+                        for (int j = 0; j < item.Line[i].Length; j++)
+                        {
+                            if (item.Line[i].Substring(j, j + 1) == "(")
+                            {
+                                int x = j;
+                                item.Line[i + 1] = "(";
+
+                                if (item.Line[i].Substring(i + 1, 1) == ")")
+                                {
+                                    item.Line[i + 1] = ")";
+                                    continue;
+                                }
+
+                                item.Line[i + 2] = item.Line[i].Substring(j, item.Line[i].Length - 1);
+                                item.Line[i + 3] = ")";
+                                item.Line[i] = item.Line[i].Substring(0, j);
+                            }
+                        }
+                    }
+                    else if (item.Line[i].Substring(0, item.Line[i].Length - 1) == "]")
+                    {
+                        for (int j = 0; j < item.Line[i].Length; j++)
+                        {
+                            if (item.Line[i].Substring(j, j + 1) == "[")
+                            {
+                                int x = j;
+                                item.Line[i + 3] = "[";
+
+                                if (item.Line[i].Substring(i + 1, 1) == "]")
+                                {
+                                    item.Line[i + 3] = "]";
+                                    continue;
+                                }
+
+                                item.Line[i + 2] = item.Line[i].Substring(j, item.Line[i].Length - 1);
+                                item.Line[i + 3] = "]";
+                                item.Line[i] = item.Line[i].Substring(0, j);
+                            }
+                        }
+                    }
+                    else if (item.Line[i].Substring(0, item.Line[i].Length - 1) == "{")
+                    {
+                        for (int j = 0; j < item.Line[i].Length; j++)
+                        {
+                            if (item.Line[i].Substring(j, j + 1) == "{")
+                            {
+                                int x = j;
+                                item.Line[i + 3] = "{";
+
+                                if (item.Line[i].Substring(i + 1, 1) == "}")
+                                {
+                                    item.Line[i + 3] = "}";
+                                    continue;
+                                }
+
+                                item.Line[i + 2] = item.Line[i].Substring(j, item.Line[i].Length - 1);
+                                item.Line[i + 3] = "]";
+                                item.Line[i] = item.Line[i].Substring(0, j);
+                            }
+                        }
+                    }
                 }
             }
         }
