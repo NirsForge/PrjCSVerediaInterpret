@@ -29,31 +29,27 @@
         {
             List<int> clamp = new List<int>() { 0, 0, 0 }; //{ "{}", "[]", "()" }
 
-            foreach (var item in code)
+            foreach (var item in argCode)
             {
-                if (item == "{")
-                    clamp[0]++;
-                else if (item == "}")
-                    clamp[0]--;
-                else if (item == "[")
-                    clamp[1]++;
-                else if (item == "]")
-                    clamp[1]--;
-                else if (item == "(")
-                    clamp[2]++;
-                else if (item == ")")
-                    clamp[2]--;
+                for (int i = 0; i < item.Line.Count(); i++)
+                {
+                    if (item.Line[i] == "{")
+                        clamp[0]++;
+                    else if (item.Line[i] == "}")
+                        clamp[0]--;
+                    else if (item.Line[i] == "[")
+                        clamp[1]++;
+                    else if (item.Line[i] == "]")
+                        clamp[1]--;
+                    else if (item.Line[i] == "(")
+                        clamp[2]++;
+                    else if (item.Line[i] == ")")
+                        clamp[2]--;
+                }
             }
 
-            if (clamp[0] < 0) return true;
-            else if (clamp[0] > 0) return true;
-
-            if (clamp[1] < 0) return true;
-            else if (clamp[1] > 0) return true;
-
-            if (clamp[2] < 0) return true;
-            else if (clamp[2] > 0) return true;
-
+            if (clamp[0] == 0 && clamp[1] == 0 && clamp[2] == 0) return true;
+            
             return false;
         }
         private void Split()
