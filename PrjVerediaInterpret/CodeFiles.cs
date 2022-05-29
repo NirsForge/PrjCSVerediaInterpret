@@ -154,13 +154,20 @@
                 for (int i = 0; i < item.Line.Length; i++)
                 {
                     if (item.Line[i] == "var")
-                        if (item.Line[i + 2] != "=")
+                    {
+                        if (item.Line[i + 2] == "=")
                         {
-                            if (Num.IsInt(item.Line[i + 3]))
-                            {
-
-                            }
+                            if (Num.IsInt(item.Line[i + 3])) intTokens.Add(new IntToken(item.Line[i + 1], Convert.ToInt32(item.Line[i + 3])));
+                            else if (Num.IsDouble(item.Line[i + 3])) douTokens.Add(new DoubleToken(item.Line[i + 1], Convert.ToDouble(item.Line[i + 3])));
+                            else if (item.Line[i + 3] == "true" || item.Line[i + 3] == "false") boolTokens.Add(new BoolToken(item.Line[i + 1], Convert.ToBoolean(item.Line[i + 3])));
+                            else strTokens.Add(new StringToken(item.Line[i + 1], item.Line[i + 3].Substring(1, item.Line[i + 3].Length - 1)));
                         }
+                    }
+                    else if (item.Line[i] == "string") strTokens.Add(new StringToken(item.Line[i + 1], item.Line[i + 3].Substring(1, item.Line[i + 3].Length - 1)));
+                    else if (item.Line[i] == "int") intTokens.Add(new IntToken(item.Line[i + 1], Convert.ToInt32(item.Line[i + 3])));
+                    else if (item.Line[i] == "double") douTokens.Add(new DoubleToken(item.Line[i + 1], Convert.ToDouble(item.Line[i + 3])));
+                    else if (item.Line[i] == "bool") boolTokens.Add(new BoolToken(item.Line[i + 1], Convert.ToBoolean(item.Line[i + 3])));
+                    else if (item.Line[i] == "string") strTokens.Add(new StringToken(item.Line[i + 1], item.Line[i + 3].Substring(1, item.Line[i + 3].Length - 1)));
                 }
             }
         }
