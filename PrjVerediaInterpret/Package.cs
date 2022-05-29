@@ -28,14 +28,5 @@
 
             if (!File.Exists(MainFile)) packageFile.Save("c.wl(\"Hello World\")");
         }
-        public static void FunCodeFiles()
-        {
-            string[] argCodeFiles = Directory.GetFiles(@"\", "*.nv", SearchOption.AllDirectories);
-
-            foreach (var item in argCodeFiles)
-            {
-                ArgCodeFiles.Add();
-            }
-        }
     }
 }
