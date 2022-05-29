@@ -21,8 +21,8 @@
 
         #region Properties
         private string Paf { get; }
-        private List<string> code, codeSection;
-        private List<string[]> argCode;
+        private List<string> code;
+        private List<CodeLines> argCode;
         #endregion //Properties
 
         private bool Missing()
@@ -60,13 +60,12 @@
         {
             foreach (var line in code)
             {
-                argCode.Add(line.Split(" "));
-                
+                argCode.Add(new CodeLines(line.Split(" ")));
             }
 
             foreach (var item in argCode)
             {
-                for (int i = 0; i < item.Length; i++)
+                for (int i = 0; i < item.Line.Count(); i++)
                 {
                     
                 }
