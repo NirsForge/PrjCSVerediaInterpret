@@ -3,7 +3,6 @@
     internal class Package
     {
         #region Properties
-        public static string MainFile { get; private set; }
         private static List<string> package = new List<string>()
         {
             $"\"name\": \"project\"",
@@ -11,6 +10,8 @@
             $"\"main\": \"index.nv\""
         };
         private static Files packageFile = new Files("package.nir");
+
+        public static string MainFile { get; private set; }
         public static List<CodeFiles> ArgCodeFiles { get; private set; }
         #endregion //Properties
 

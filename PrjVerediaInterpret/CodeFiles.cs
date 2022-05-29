@@ -22,6 +22,13 @@
         #endregion //Initialise
 
         #region Properties
+        private List<StringToken> strTokens = new List<StringToken>();
+        private List<IntToken> intTokens = new List<IntToken>();
+        private List<DoubleToken> douTokens = new List<DoubleToken>();
+        private List<BoolToken> boolTokens = new List<BoolToken>();
+        private List<FunctionToken> funTokens = new List<FunctionToken>();
+        private List<ClassToken> classTokens = new List<ClassToken>();
+
         public List<CodeLine> ArgCode { get; private set; }
         public List<string> Code { get; private set; }
         #endregion //Properties
@@ -32,7 +39,7 @@
 
             foreach (var item in ArgCode)
             {
-                for (int i = 0; i < item.Line.Count(); i++)
+                for (int i = 0; i < item.Line.Length; i++)
                 {
                     if (item.Line[i] == "{")
                         clamp[0]++;
@@ -62,7 +69,7 @@
 
             foreach (var item in ArgCode)
             {
-                for (int i = 0; i < item.Line.Count(); i++)
+                for (int i = 0; i < item.Line.Length; i++)
                 {
                     if (item.Line[i].Substring(0, item.Line[i].Length - 1) == ";")
                     {
@@ -137,6 +144,23 @@
                             }
                         }
                     }
+                }
+            }
+        }
+        private void Token()
+        {
+            foreach (var item in ArgCode)
+            {
+                for (int i = 0; i < item.Line.Length; i++)
+                {
+                    if (item.Line[i] == "var")
+                        if (item.Line[i + 2] != "=")
+                        {
+                            if (Num.IsInt(item.Line[i + 3]))
+                            {
+
+                            }
+                        }
                 }
             }
         }
