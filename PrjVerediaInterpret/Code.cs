@@ -177,6 +177,30 @@
                         else if (item.Line[i] == "bool") boolTokens.Add(new BoolToken(item.Line[i + 1], Convert.ToBoolean(item.Line[i + 3])));
                         else if (item.Line[i] == "string") strTokens.Add(new StringToken(item.Line[i + 1], item.Line[i + 3].Substring(1, item.Line[i + 3].Length - 1)));
                     }
+                    else if (item.Line[i] == "c.wl")
+                    {
+                        if (item.Line.Length < 4) Lib.End("Invalid Argument!");
+                    }
+                    else if (item.Line[i] == "c.w")
+                    {
+                        if (item.Line.Length < 4) Lib.End("Invalid Argument!");
+                    }
+                    else if (item.Line[i] == "c.r")
+                    {
+                        if (item.Line.Length < 4) Lib.End("Invalid Argument!");
+                    }
+                    else if (item.Line[i] == "c.border")
+                    {
+                        if (item.Line.Length < 4) Lib.End("Invalid Argument!");
+                    }
+                    else if (item.Line[i] == "c.color")
+                    {
+                        if (item.Line.Length != 3 || item.Line.Length != 4) Lib.End("Invalid Argument!");
+                    }
+                    else if (item.Line[i] == "c.end")
+                    {
+                        if (item.Line.Length < 4) Lib.End("Invalid Argument!");
+                    }
                 }
             }
         }
