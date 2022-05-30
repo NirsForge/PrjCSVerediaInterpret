@@ -12,7 +12,6 @@
         private static Files packageFile = new Files("package.nir");
 
         public static string MainFile { get; private set; }
-        public static List<CodeFiles> ArgCodeFiles { get; private set; }
         #endregion //Properties
 
         public static void Start()

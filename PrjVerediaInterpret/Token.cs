@@ -1,5 +1,16 @@
 ﻿namespace Project
 {
+    class ConsoleToken
+    {
+        public ConsoleToken(string typ, string val)
+        {
+            Typ = typ;
+            Val = val;
+        }
+
+        public string Typ { get; }
+        public string Val { get; }
+    }
     class FunctionToken
     {
 
